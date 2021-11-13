@@ -1,0 +1,25 @@
+using System;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        public static double Calculate(string userInput)
+        {
+            var partsOfString = userInput.Split();
+            var originalAmount = double.Parse(partsOfString[0]);
+            var percent = double.Parse(partsOfString[1]);
+            var termOfdeposit = int.Parse(partsOfString[2]);
+            for (int i = 0; i < termOfdeposit; i++)
+            {
+                originalAmount += (originalAmount*((percent/12.00)/100));
+            }
+            return originalAmount;
+        }
+        static void Main(string[] args)
+        {
+            var userInput = Console.ReadLine();
+            Console.WriteLine(Calculate(userInput));
+        }
+    }
+}
