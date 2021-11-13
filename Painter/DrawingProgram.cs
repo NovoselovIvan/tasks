@@ -5,7 +5,6 @@ using System.Drawing.Drawing2D;
 
 namespace RefactorMe
 {
-    
     class Painter
     {
         static float x, y;
@@ -40,52 +39,6 @@ namespace RefactorMe
 
     public class ImpossibleSquare
     {
-        const float firstValue = 0.375f;
-        const float secondValue = 0.04f;
-
-        public static void DrawFirstSide(int sz)
-        {
-            Painter.MakeIt(Pens.Yellow, sz * firstValue, 0);
-            Painter.MakeIt(Pens.Yellow, sz * secondValue * Math.Sqrt(2), Math.PI / 4);
-            Painter.MakeIt(Pens.Yellow, sz * firstValue, Math.PI);
-            Painter.MakeIt(Pens.Yellow, sz * firstValue - sz * secondValue, Math.PI / 2);
-
-            Painter.Change(sz * secondValue, -Math.PI);
-            Painter.Change(sz * secondValue * Math.Sqrt(2), 3 * Math.PI / 4);
-        }
-
-        public static void DrawSecondSide(int sz)
-        {
-            Painter.MakeIt(Pens.Yellow, sz * firstValue, -Math.PI / 2);
-            Painter.MakeIt(Pens.Yellow, sz * secondValue * Math.Sqrt(2), -Math.PI / 2 + Math.PI / 4);
-            Painter.MakeIt(Pens.Yellow, sz * firstValue, -Math.PI / 2 + Math.PI);
-            Painter.MakeIt(Pens.Yellow, sz * firstValue - sz * secondValue, -Math.PI / 2 + Math.PI / 2);
-
-            Painter.Change(sz * secondValue, -Math.PI / 2 - Math.PI);
-            Painter.Change(sz * secondValue * Math.Sqrt(2), -Math.PI / 2 + 3 * Math.PI / 4);
-        }
-
-        public static void DrawThirdSide(int sz)
-        {
-            Painter.MakeIt(Pens.Yellow, sz * firstValue, Math.PI);
-            Painter.MakeIt(Pens.Yellow, sz * secondValue * Math.Sqrt(2), Math.PI + Math.PI / 4);
-            Painter.MakeIt(Pens.Yellow, sz * firstValue, Math.PI + Math.PI);
-            Painter.MakeIt(Pens.Yellow, sz * firstValue - sz * secondValue, Math.PI + Math.PI / 2);
-
-            Painter.Change(sz * secondValue, Math.PI - Math.PI);
-            Painter.Change(sz * secondValue * Math.Sqrt(2), Math.PI + 3 * Math.PI / 4);
-        }
-
-        public static void DrawFourthSide(int sz)
-        {
-            Painter.MakeIt(Pens.Yellow, sz * firstValue, Math.PI / 2);
-            Painter.MakeIt(Pens.Yellow, sz * secondValue * Math.Sqrt(2), Math.PI / 2 + Math.PI / 4);
-            Painter.MakeIt(Pens.Yellow, sz * firstValue, Math.PI / 2 + Math.PI);
-            Painter.MakeIt(Pens.Yellow, sz * firstValue - sz * secondValue, Math.PI / 2 + Math.PI / 2);
-
-            Painter.Change(sz * secondValue, Math.PI / 2 - Math.PI);
-            Painter.Change(sz * secondValue * Math.Sqrt(2), Math.PI / 2 + 3 * Math.PI / 4);
-        }
         public static void Draw(int width, int height, double angleOfRotation, Graphics graphics)
         {
             // ugolPovorota пока не используется, но будет использоваться в будущем
@@ -93,19 +46,47 @@ namespace RefactorMe
 
             var sz = Math.Min(width, height);
 
-            var diagonal_length = Math.Sqrt(2) * (sz * firstValue + sz * secondValue) / 2;
+            var diagonal_length = Math.Sqrt(2) * (sz * 0.375f + sz * 0.04f) / 2;
             var x0 = (float)(diagonal_length * Math.Cos(Math.PI / 4 + Math.PI)) + width / 2f;
             var y0 = (float)(diagonal_length * Math.Sin(Math.PI / 4 + Math.PI)) + height / 2f;
 
             Painter.Set_position(x0, y0);
 
             //Рисуем 1-ую сторону
-            DrawFirstSide (sz);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f, 0);
+            Painter.MakeIt(Pens.Yellow, sz * 0.04f * Math.Sqrt(2), Math.PI / 4);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f, Math.PI);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f - sz * 0.04f, Math.PI / 2);
+
+            Painter.Change(sz * 0.04f, -Math.PI);
+            Painter.Change(sz * 0.04f * Math.Sqrt(2), 3 * Math.PI / 4);
+
             //Рисуем 2-ую сторону
-            DrawSecondSide(sz);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f, -Math.PI / 2);
+            Painter.MakeIt(Pens.Yellow, sz * 0.04f * Math.Sqrt(2), -Math.PI / 2 + Math.PI / 4);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f, -Math.PI / 2 + Math.PI);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f - sz * 0.04f, -Math.PI / 2 + Math.PI / 2);
+
+            Painter.Change(sz * 0.04f, -Math.PI / 2 - Math.PI);
+            Painter.Change(sz * 0.04f * Math.Sqrt(2), -Math.PI / 2 + 3 * Math.PI / 4);
+
             //Рисуем 3-ю сторону
-            DrawThirdSide(sz);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f, Math.PI);
+            Painter.MakeIt(Pens.Yellow, sz * 0.04f * Math.Sqrt(2), Math.PI + Math.PI / 4);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f, Math.PI + Math.PI);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f - sz * 0.04f, Math.PI + Math.PI / 2);
+
+            Painter.Change(sz * 0.04f, Math.PI - Math.PI);
+            Painter.Change(sz * 0.04f * Math.Sqrt(2), Math.PI + 3 * Math.PI / 4);
+
             //Рисуем 4-ую сторону
-            DrawFourthSide(sz);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f, Math.PI / 2);
+            Painter.MakeIt(Pens.Yellow, sz * 0.04f * Math.Sqrt(2), Math.PI / 2 + Math.PI / 4);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f, Math.PI / 2 + Math.PI);
+            Painter.MakeIt(Pens.Yellow, sz * 0.375f - sz * 0.04f, Math.PI / 2 + Math.PI / 2);
+
+            Painter.Change(sz * 0.04f, Math.PI / 2 - Math.PI);
+            Painter.Change(sz * 0.04f * Math.Sqrt(2), Math.PI / 2 + 3 * Math.PI / 4);
+        }
     }
 }
