@@ -1,0 +1,17 @@
+using System;
+
+namespace Expr11
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Введите время в часах и в минутах:\t");
+            var hours = int.Parse(Console.ReadLine());
+            var minutes = int.Parse(Console.ReadLine());
+            if (hours > 12 && hours <= 24)
+                hours -= 12;
+            Console.WriteLine("Угол между минутной и часой стрелкой равен:" + Math.Abs(hours * 30 - minutes * 6));
+        }
+    }
+}
