@@ -4,25 +4,28 @@ namespace Expr12
 {
     class Program
     {
-        public static double AreaOfCircle(double radius) {
+        public static double AreaOfCircle(double radius)
+        {
             return Math.PI * radius * radius;
         }
 
-        public static double Hypotenuse(double side) {
+        public static double Hypotenuse(double side)
+        {
             return Math.Sqrt((side * side) + (side * side));
         }
 
-        public static double LegOfTriangle(double hypotenuse, double leg) {
+        public static double LegOfTriangle(double hypotenuse, double leg)
+        {
             return Math.Sqrt(hypotenuse * hypotenuse - leg * leg);
         }
 
-        public static double GetAngle(double lengthOfSide, double radius) {
+        public static double GetAngle(double lengthOfSide, double radius)
+        {
             var chord = 2 * LegOfTriangle(radius, lengthOfSide);
-            return 2 * Math.Asin(chord/(2*radius));
+            return 2 * Math.Asin(chord / (2 * radius));
         }
         static int Main(string[] args)
         {
-            Console.WriteLine("Введите длину стороны огорода и длину веревки");
             var userInput = Console.ReadLine();
             var partsOfString = userInput.Split();
             var lengthOfSide = double.Parse(partsOfString[0]);
@@ -39,13 +42,12 @@ namespace Expr12
             {
                 if (radius > lengthOfSide / 2.0)
                 {
-                    var angle = GetAngle(lengthOfSide/2.0, radius);
-                    var areaSegmentOfCirlce = ((radius * 2) * (angle - Math.Sin(angle)))/2;
+                    var angle = GetAngle(lengthOfSide / 2.0, radius);
+                    var areaSegmentOfCirlce = ((radius * radius) * (angle - Math.Sin(angle))) / 2;
                     areaCircle -= areaSegmentOfCirlce * 4;
-
+                    Console.WriteLine(areaCircle);
                 }
             }
-            Console.WriteLine(areaCircle);
             return 0;
         }
     }
