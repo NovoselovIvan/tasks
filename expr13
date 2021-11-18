@@ -45,8 +45,8 @@ namespace Expr12
                     var angle = GetAngle(lengthOfSide / 2.0, radius);
                     var areaSegmentOfCirlce = ((radius * radius) * (angle - Math.Sin(angle))) / 2;
                     areaCircle -= areaSegmentOfCirlce * 4;
-                    Console.WriteLine(areaCircle);
                 }
+                Console.WriteLine(areaCircle);
             }
             return 0;
         }
