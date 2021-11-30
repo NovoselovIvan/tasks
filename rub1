@@ -1,0 +1,16 @@
+namespace Pluralize
+{
+	public static class PluralizeTask
+	{
+		public static string PluralizeRubles(int count)
+		{
+			var remainder1 = count % 10;
+			var remainder2 = count % 100;
+			if ((remainder2 >= 5 && remainder2 <= 20) || (remainder1 == 0) || (remainder1 >= 5 && remainder1 <= 9))
+				return "рублей";
+			else if (remainder1 == 2 || remainder1 == 3 || remainder1 == 4)
+				return "рубля";
+			return "рубль";
+		}
+	}
+}
