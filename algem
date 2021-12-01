@@ -1,0 +1,61 @@
+using System;
+
+namespace DistanceTask
+{
+	public static class DistanceTask
+	{
+		public static double GetDistance(double x1, double y1, double x2, double y2)
+		{
+			var dX = x2 - x1;
+			var dY = y2 - y1;
+			return Math.Sqrt((dX * dX) + (dY * dY));
+		}
+
+		public static double GetPerimeter(double side1, double side2, double side3)
+		{
+			return (side1 + side2 + side3);
+		}
+
+		public static double GetArea(double side1, double side2, double side3)
+		{
+			var halfOfPerimeter = GetPerimeter(side1, side2, side3) / 2.0;
+			return Math.Sqrt(halfOfPerimeter * ((halfOfPerimeter - side1) * (halfOfPerimeter - side2) * (halfOfPerimeter - side3)));
+		}
+
+		public static double GetDot(double ax, double ay, double bx, double by, double x, double y)
+		{
+			var ACx = x - ax;
+			var ACy = y - ay;
+			var BCx = x - bx;
+			var BCy = y - by;
+			return ACx * BCx + ACy * BCy;
+		}
+		public static double GetDistanceToSegment(double ax, double ay, double bx, double by, double x, double y)
+		{
+			var lengthAB = GetDistance(ax, ay, bx, by);
+			var lengthAC = GetDistance(ax, ay, x, y);
+			var lengthBC = GetDistance(bx, by, x, y);
+			var area = GetArea(lengthAB, lengthAC, lengthBC);
+			var height = 2.0 * area / lengthAB;
+			var distance = Math.Min(lengthAC, lengthBC);
+
+			var ACx = x - ax;
+			var ACy = y - ay;
+			var ABx = bx - ax;
+			var ABy = by - ay;
+			var dotACandAB = ACx * ABx + ACy * ABy;
+
+			var BAx = ax - bx;
+			var BAy = ay - by;
+			var BCx = x - bx;
+			var BCy = y - by;
+			var dotBAandBC = BAx * BCx + BAy * BCy;
+
+			if (dotACandAB < 0 || dotBAandBC < 0)
+			{
+				return distance;
+			} else
+			return height;
+		}
+	}
+}
