@@ -4,52 +4,71 @@ namespace Cond1
 {
     class Program
     {
-
-        public static bool IsMoveExist(string firstCell, string lastCell)
+        public static bool WasMoveMade(int dx, int dy)
         {
-            var dx = Math.Abs(firstCell[0] - lastCell[0]); 
-            var dy = Math.Abs(firstCell[1] - lastCell[1]); 
-            if (dx == 0 && dy == 0)
-            return false;
-            return true;
+            return (dx + dy) > 0;
         }
 
-        public static bool IsCellCorrect(string firstCell, string lastCell)
+        public static bool IsCellCorrect(string cell)
         {
-            if (firstCell[0] >= 61 && lastCell[0] >= 61 && firstCell[1] > 31 && lastCell[1] > 31 && 
-                firstCell[0] <= 68 && lastCell[0] <= 68 && firstCell[1] <= 38 && lastCell[1] <= 38)
-                return true;
-            return false;
+            var file = cell[0];
+            var rank = cell[1];
+            var isFileValid = 'a' <= file && file <= 'h';
+            var isRankValid = '1' <= rank && rank <= '8';
+            return isFileValid && isRankValid;
         }
+
+        public static bool IsMoveValid(string from, string to)
+        {
+            if (!(IsCellCorrect(from) && IsCellCorrect(to)))
+                return false;
+            var (dx, dy) = GetMoveCoordinates(from, to);
+            return WasMoveMade(dx, dy);
+        }
+
+        public static (int, int) GetMoveCoordinates(string from, string to)
+        {
+            var dx = Math.Abs(from[0] - to[0]);
+            var dy = Math.Abs(from[1] - to[1]);
+            return (dx, dy);
+        }
+
         public static bool IsCorrectMoveForRook(string firstCell, string lastCell)
-        {
-            return false;
+        {var (dx, dy) = GetMoveCoordinates(firstCell, lastCell);
+            return (dx == 2 && dy == 1) || (dy == 2 && dx == 1);
         }
+
         public static bool IsCorrectMoveForKnight(string firstCell, string lastCell) 
         {
-            return false;
+            var (dx, dy) = GetMoveCoordinates(firstCell, lastCell);
+            return dx == 0 || dy == 0;
         }
 
         public static bool IsCorrectMoveForBishop(string firstCell, string lastCell)
         {
-            return false;
+            var (dx, dy) = GetMoveCoordinates(firstCell, lastCell);
+            return dx == dy;
         }
+
         public static bool IsCorrectMoveForQueen(string firstCell, string lastCell)
         {
-            return false;
+            var (dx, dy) = GetMoveCoordinates(firstCell, lastCell);
+            return dx == 0 || dy == 0 || dx == dy;
         }
 
         public static bool IsCorrectMoveForKing(string firstCell, string lastCell)
         {
-            return false;
+            var (dx, dy) = GetMoveCoordinates(firstCell, lastCell);
+            return (dx == 0 || dy == 0 || dx == dy) && (dx < 2 && dy < 2);
         }
+
         static void Main(string[] args)
         {
             var firstCell = Console.ReadLine();
             var lastCell = Console.ReadLine();
 
             Console.WriteLine("Is that correct move?");
-            if (IsCellCorrect(firstCell, lastCell) && IsMoveExist(firstCell, lastCell))
+            if (IsMoveValid(firstCell, lastCell))
             {
                 Console.WriteLine("For Rook: " + IsCorrectMoveForRook(firstCell, lastCell));
                 Console.WriteLine("For Knight: " + IsCorrectMoveForKnight(firstCell, lastCell));
