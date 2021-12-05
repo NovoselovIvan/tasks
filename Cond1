@@ -1,0 +1,64 @@
+using System;
+
+namespace Cond1
+{
+    class Program
+    {
+
+        public static bool IsMoveExist(string firstCell, string lastCell)
+        {
+            var dx = Math.Abs(firstCell[0] - lastCell[0]); 
+            var dy = Math.Abs(firstCell[1] - lastCell[1]); 
+            if (dx != 0 && dy != 0)
+            return true;
+            return false;
+        }
+
+        public static bool IsCellCorrect(string firstCell, string lastCell)
+        {
+            if (firstCell[0] >= 41 && lastCell[0] >= 41 && firstCell[1] > 30 && lastCell[1] > 30 && 
+                firstCell[0] <= 48 && lastCell[0] <= 48 && firstCell[1] <= 37 && lastCell[1] <= 37)
+                return true;
+            return false;
+        }
+        public static bool IsCorrectMoveForRook(string firstCell, string lastCell)
+        {
+            return false;
+        }
+        public static bool IsCorrectMoveForKnight(string firstCell, string lastCell) 
+        {
+            return false;
+        }
+
+        public static bool IsCorrectMoveForBishop(string firstCell, string lastCell)
+        {
+            return false;
+        }
+        public static bool IsCorrectMoveForQueen(string firstCell, string lastCell)
+        {
+            return false;
+        }
+
+        public static bool IsCorrectMoveForKing(string firstCell, string lastCell)
+        {
+            return false;
+        }
+        static void Main(string[] args)
+        {
+            var firstCell = Console.ReadLine();
+            var lastCell = Console.ReadLine();
+
+            Console.WriteLine("Is that correct move?");
+            if (IsCellCorrect(firstCell, lastCell) && IsMoveExist(firstCell, lastCell))
+            {
+                Console.WriteLine("For Rook: " + IsCorrectMoveForRook(firstCell, lastCell));
+                Console.WriteLine("For Knight: " + IsCorrectMoveForKnight(firstCell, lastCell));
+                Console.WriteLine("For Bishop: " + IsCorrectMoveForBishop(firstCell, lastCell));
+                Console.WriteLine("For Queen: " + IsCorrectMoveForQueen(firstCell, lastCell));
+                Console.WriteLine("For King: " + IsCorrectMoveForKing(firstCell, lastCell));
+            }
+            else
+                Console.WriteLine("Data is incorrect");
+        }
+    }
+}
