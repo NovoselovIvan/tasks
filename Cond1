@@ -9,15 +9,15 @@ namespace Cond1
         {
             var dx = Math.Abs(firstCell[0] - lastCell[0]); 
             var dy = Math.Abs(firstCell[1] - lastCell[1]); 
-            if (dx != 0 && dy != 0)
-            return true;
+            if (dx == 0 && dy == 0)
             return false;
+            return true;
         }
 
         public static bool IsCellCorrect(string firstCell, string lastCell)
         {
-            if (firstCell[0] >= 41 && lastCell[0] >= 41 && firstCell[1] > 30 && lastCell[1] > 30 && 
-                firstCell[0] <= 48 && lastCell[0] <= 48 && firstCell[1] <= 37 && lastCell[1] <= 37)
+            if (firstCell[0] >= 61 && lastCell[0] >= 61 && firstCell[1] > 31 && lastCell[1] > 31 && 
+                firstCell[0] <= 68 && lastCell[0] <= 68 && firstCell[1] <= 38 && lastCell[1] <= 38)
                 return true;
             return false;
         }
